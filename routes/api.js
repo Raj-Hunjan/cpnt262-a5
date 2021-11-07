@@ -6,7 +6,6 @@ const cars = require("../data/cars")
 /*****************/
 
 // List entry route
-// TODO: refactor for arrow functions so we look fashionable
 app.get('/api/cars', (req, res) => {
   let carRandom = null;
 
