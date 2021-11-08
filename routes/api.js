@@ -1,51 +1,41 @@
 const cars = require("../data/cars")
+const express = require('express')
+const router = express.Router()
 
-  
 /*****************/
 /* Define routes */
 /*****************/
 
 // List entry route
-app.get('/api/cars', (req, res) => {
-  let carRandom = null;
+router.get('/cars', (req, res) => {
 
-  // TODO: Add support for `?filter=poisoned` and return all cars members that have `poisoned` set to true
-  if (req.query.filter === 'random') {   
+    if (typeof cars !== 'undefined' && Array.isArray(cars)) {
+      // Variable is an array!
+      res.send(cars)
+    } else {
+      res.status(404)
+      res.send({ error: 'File Not Found' })
+    }
 
-    carRandom = randomItem(cars)
-    res.send(carRandom)
-
-  } else if (typeof cars !== 'undefined' && Array.isArray(cars)) {
-
-    // Variable is an array!
-    res.send(cars)
-
-  } else {
-
-    res.status(404)
-    res.send({error: 'File Not Found'})
-    
-  }
-
-})
+  })
 
 // Item route
-app.get('/api/cars/:id', (req, res) => {
-  let vehicle
+router.get('/cars/:id', (req, res) => {
+    let carRandom
 
-  if (typeof cars !== 'undefined' && Array.isArray(cars)) {
-    vehicle = cars.find(item => req.params.id === item.id) // Use Array.find() here
-  } else {
-    vehicle = null;
-  }
-  
-  if (typeof vehicle === 'object' && vehicle !== null) {
-    res.send(vehicle)
-  } else {
-    res.status(404)
-    res.send({error: 'File Not Found'})
-  }
-})
+    if (typeof cars !== 'undefined' && Array.isArray(cars)) {
+      carRandom = cars.find(item => Number(req.params.id) === item.id) // Use Array.find() here
+    } else {
+      carRandom = null
+    }
+
+    if (typeof carRandom === 'object' && carRandom !== null) {
+      res.send(carRandom)
+    } else {
+      res.status(404)
+      res.send({ error: 'File Not Found' })
+    }
+  })
 
 
-      
+   module.exports = router   

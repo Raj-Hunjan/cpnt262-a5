@@ -1,5 +1,4 @@
 // Accept command line input
-const inputValue = process.argv[2]
 
 // Array
 const cars = [
