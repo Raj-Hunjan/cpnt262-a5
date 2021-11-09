@@ -1,4 +1,4 @@
-const cars = require("../data/cars")
+const cars = require("../models/cars")
 const express = require('express')
 const router = express.Router()
 

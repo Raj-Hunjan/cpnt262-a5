@@ -4,8 +4,19 @@ const app = express()
 const cars = require('./routes/api')
 app.use('/api', cars)
 
-// const mongoose = require('mongoose');
-// const dotenv = require('dotenv').config();
+const mongoose = require('mongoose');
+const dotenv = require('dotenv').config();
+
+mongoose.connect(
+  process.env.MONGODB_URL,
+  { useUnifiedTopology: true, useNewUrlParser: true },
+  )
+  .then(function(){
+    console.log('Connected to DB...')
+  })
+  .catch(function(err){
+    console.log(err)
+  });
 
 
 // Handle 404 errors with middleware
@@ -32,3 +43,4 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
   });
+
