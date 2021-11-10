@@ -1,25 +1,17 @@
+const dotenv = require('dotenv').config();
+
 const express = require('express')
 const app = express()
 
 const cars = require('./routes/api')
+
 app.use('/api', cars)
+app.use(express.static('public'))
 
-const mongoose = require('mongoose');
-const dotenv = require('dotenv').config();
+/*************************************/
+/* Handle 404 errors with middleware */
+/*************************************/
 
-mongoose.connect(
-  process.env.MONGODB_URL,
-  { useUnifiedTopology: true, useNewUrlParser: true },
-  )
-  .then(function(){
-    console.log('Connected to DB...')
-  })
-  .catch(function(err){
-    console.log(err)
-  });
-
-
-// Handle 404 errors with middleware
 app.use((req, res) => {
 
     // If path starts with `/api`, send JSON 404
@@ -37,7 +29,10 @@ app.use((req, res) => {
     }
   });
 
-  // Start server
+/*****************/
+/* Start server */
+/****************/
+
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
