@@ -1,5 +1,5 @@
-const cars = require("../models/cars")
-const express = require('express')
+const cars = require("../models/cars") // imports car gallery 
+const express = require('express') // imports express
 const router = express.Router()
 
 /*****************/
@@ -7,7 +7,7 @@ const router = express.Router()
 /*****************/
 
 // List entry route
-router.get('/cars', (req, res) => {
+router.get('/cars', (req, res) => { // gets cars 
 
     if (typeof cars !== 'undefined' && Array.isArray(cars)) {
       // Variable is an array!
@@ -20,7 +20,7 @@ router.get('/cars', (req, res) => {
   })
 
 // Item route
-router.get('/cars/:id', (req, res) => {
+router.get('/cars/:id', (req, res) => { // gets car based on id
     let carRandom
 
     if (typeof cars !== 'undefined' && Array.isArray(cars)) {
