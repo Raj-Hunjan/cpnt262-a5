@@ -17,8 +17,8 @@ router.get('/cars', (req, res) => { // gets cars
       res.send({ error: 'File Not Found' })
     }
 
-  })
-  
+})
+
 // Item route
 router.get('/cars/:id', (req, res) => { // gets car based on id
     let carRandom
@@ -35,7 +35,7 @@ router.get('/cars/:id', (req, res) => { // gets car based on id
       res.status(404)
       res.send({ error: 'File Not Found' })
     }
-  })
+})
 
 
-   module.exports = router // exports router
+module.exports = router // exports router
